@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STUDENT FORM</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url('123.gif'); /* Replace 'path_to_your_image.gif' with the actual path to your GIF image */
+        background-size: cover;
+        background-position: center;
+        margin: 0;
+        padding: 20px;
+    }
+    h1 {
+        color: #333;
+    }
+    form {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+    }
+    input[type="radio"] {
+        margin-right: 5px;
+    }
+    input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+    }
+    /* Style for submitted data in table */
+    #submittedData {
+        background-color: rgba(255, 255, 255, 0.8); /* Change background color here */
+    }
+    #submittedData td {
+        color: #333; /* Change text color here */
+    }
+</style>
+</head>
+<body>
+    <h1>STUDENT FORM</h1>
+    <form action="/submit" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+      
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+      
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+      
+        <label for="gender">Gender:</label>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label><br><br>
+      
+        <label for="">Interests:</label>
+        <select name="interests" id="interests">
+            <option value="coding">Coding</option>
+            <option value="reading">Reading</option>
+            <option value="sports">Sports</option>
+        </select><br><br>
+              
+        <input type="submit" value="Submit">
+    </form>
+
+    <!-- Table to display submitted data -->
+    <h2>Submitted Data</h2>
+    <table id="submittedData">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Gender</th>
+            <th>Interests</th>
+        </tr>
+        <!-- Data will be dynamically added here -->
+    </table>
+
+    <!-- Script to handle form submission and display data in the table -->
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const rowData = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                password: formData.get('password'),
+                gender: formData.get('gender'),
+                interests: formData.get('interests')
+            };
+            const table = document.getElementById('submittedData');
+            const newRow = table.insertRow(-1);
+            for (const key in rowData) {
+                const cell = newRow.insertCell();
+                cell.textContent = rowData[key];
+            }
+            form.reset();
+        });
+    </script>
+</body>
+</html>
